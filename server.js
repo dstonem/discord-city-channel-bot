@@ -166,10 +166,13 @@ async function handleOnboardingCompletion(member, onboardingData) {
 app.post("/api/onboarding", async (req, res) => {
   try {
     const { userId, city, state, interest } = req.body;
+    console.log("here", userId, city, state, interest);
 
     if (!userId || !city || !state || !interest) {
       return res.status(400).json({ error: "Missing required fields" });
     }
+
+    console.log("there");
 
     // Get guild and member
     const guild = client.guilds.cache.get(process.env.GUILD_ID);
@@ -177,13 +180,19 @@ app.post("/api/onboarding", async (req, res) => {
       return res.status(500).json({ error: "Guild not found" });
     }
 
+    console.log("where");
+
     const member = await guild.members.fetch(userId);
     if (!member) {
       return res.status(404).json({ error: "Member not found" });
     }
 
+    console.log("huh");
+
     // Process onboarding
     await handleOnboardingCompletion(member, { city, state, interest });
+
+    console.log("oh");
 
     res.json({ success: true, message: "Onboarding completed successfully" });
   } catch (error) {
