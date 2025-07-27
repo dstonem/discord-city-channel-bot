@@ -236,4 +236,7 @@ app.listen(PORT, () => {
 });
 
 // Login bot
-client.login(process.env.DISCORD_TOKEN);
+setTimeout(() => {
+  console.log("🤖 Attempting to login...");
+  client.login(process.env.DISCORD_TOKEN);
+}, 1000);
